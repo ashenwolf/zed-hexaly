@@ -1,0 +1,11 @@
+# Zed extension build output. Zed compiles the extension into target/ and clones the
+# grammars named in extension.toml into grammars/; both are regenerated on install.
+target/
+grammars/
+*.wasm
+
+# Agent scratch state, not part of the extension.
+.kermes/
+.agents/
+
+*.log
