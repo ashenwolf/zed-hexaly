@@ -1,0 +1,14 @@
+id = "hexaly"
+name = "Hexaly"
+description = "Syntax highlighting for Hexaly Modeler models (.hxm, legacy .lsp)"
+version = "0.1.0"
+schema_version = 1
+authors = ["Sergii Gulenok <graywolfs@gmail.com>"]
+repository = "https://github.com/ashenwolf/zed-hexaly"
+
+# The grammar is a separate repository: Zed clones it at `rev` and compiles its generated
+# src/parser.c directly, and keeping it apart means no generated C lives in this repo. `rev`
+# must be bumped whenever the grammar changes.
+[grammars.hexaly]
+repository = "https://github.com/ashenwolf/tree-sitter-hexaly"
+rev = "c33205ef91bd08eaa8ee183b49a21b507036447b"
