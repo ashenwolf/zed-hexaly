@@ -1,7 +1,7 @@
 # zed-hexaly
 
 Hexaly language support for [Zed](https://zed.dev) — syntax highlighting for Hexaly Modeler
-models (`.hxm`, and the legacy LocalSolver `.lsp`).
+models (`.hxm`).
 
 Ships a purpose-built tree-sitter grammar for the language,
 because none existed publicly: [tree-sitter-hexaly](https://github.com/ashenwolf/tree-sitter-hexaly).

@@ -1,6 +1,6 @@
 id = "hexaly"
 name = "Hexaly"
-description = "Syntax highlighting for Hexaly Modeler models (.hxm, legacy .lsp)"
+description = "Syntax highlighting for Hexaly Modeler models (.hxm)"
 version = "0.1.0"
 schema_version = 1
 authors = ["Sergii Gulenok <graywolfs@gmail.com>"]

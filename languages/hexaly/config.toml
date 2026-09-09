@@ -1,9 +1,7 @@
 name = "Hexaly"
 grammar = "hexaly"
 
-# .lsp is the legacy LocalSolver extension; the official Hexaly VS Code extension still
-# claims it, so models predating the rebrand keep working.
-path_suffixes = ["hxm", "lsp"]
+path_suffixes = ["hxm"]
 
 line_comments = ["// "]
 block_comment = ["/* ", " */"]
