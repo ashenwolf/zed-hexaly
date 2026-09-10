@@ -1,0 +1,16 @@
+[package]
+name = "zed-hexaly"
+description = "Hexaly Modeler language support for Zed"
+version = "0.1.0"
+authors = ["Sergii Gulenok <graywolfs@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/ashenwolf/zed-hexaly"
+edition = "2021"
+publish = false
+
+[lib]
+# Zed loads extensions as WebAssembly components.
+crate-type = ["cdylib"]
+
+[dependencies]
+zed_extension_api = "0.7.0"

@@ -1,6 +1,6 @@
 id = "hexaly"
 name = "Hexaly"
-description = "Syntax highlighting for Hexaly Modeler models (.hxm)"
+description = "Hexaly Modeler language support for Zed: syntax highlighting and a language server for .hxm"
 version = "0.1.0"
 schema_version = 1
 authors = ["Sergii Gulenok <graywolfs@gmail.com>"]
@@ -12,3 +12,9 @@ repository = "https://github.com/ashenwolf/zed-hexaly"
 [grammars.hexaly]
 repository = "https://github.com/ashenwolf/tree-sitter-hexaly"
 rev = "e5154a10c07b92f99a306b17c41f687206c3b31b"
+
+# hexaly-lsp is a separate executable the user installs, not a bundled binary. It speaks plain LSP
+# over stdio and is not Zed-specific, so the same server serves Neovim, Helix and Emacs.
+[language_servers.hexaly-lsp]
+name = "Hexaly Language Server"
+languages = ["Hexaly"]
