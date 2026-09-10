@@ -31,13 +31,15 @@ What works today:
 
 Not yet in the Zed extension registry. To use it now, install as a dev extension:
 
-1. Install the language server: `cargo install --git https://github.com/ashenwolf/hexaly-lsp`
-2. Clone this repository
-3. In Zed, run `zed: install dev extension` from the command palette
-4. Select the cloned directory
+1. Clone this repository
+2. In Zed, run `zed: install dev extension` from the command palette
+3. Select the cloned directory
 
-The server is found on `$PATH`, then at `~/.cargo/bin/hexaly-lsp`. If neither works, set the path
-explicitly:
+The language server is downloaded automatically on first use — no Rust toolchain and no separate
+install step. If you would rather supply your own build, one on `$PATH` or at
+`~/.cargo/bin/hexaly-lsp` is preferred over the download, so `cargo install --git
+https://github.com/ashenwolf/hexaly-lsp` keeps working and wins. An explicit path overrides
+everything:
 
 ```json
 {
@@ -47,9 +49,9 @@ explicitly:
 }
 ```
 
-On a **remote (SSH) project** the server runs on the remote host, so install it there — and put any
-explicit path in that project's `.zed/settings.json` rather than your global settings, which are
-shared with local projects and would point at the wrong filesystem.
+On a **remote (SSH) project** the server runs on the remote host, and the extension downloads it
+there. If you set an explicit path instead, put it in that project's `.zed/settings.json` rather than
+your global settings, which are shared with local projects and would point at the wrong filesystem.
 
 Diagnostics from the Hexaly compiler need a Hexaly installation but **no licence**; without one the
 server reports so and continues with everything else.
