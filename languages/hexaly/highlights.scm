@@ -1,3 +1,9 @@
+; Zed resolves overlapping captures by pattern order: the LAST matching pattern wins (the
+; nvim-treesitter/Helix convention — the opposite of the tree-sitter CLI's first-wins). So
+; this file is ordered general-to-specific: the `(identifier) @variable` catch-all comes
+; before every specific identifier capture, otherwise it would repaint functions,
+; parameters and properties as plain variables.
+
 ; Modeling keywords first: these are what distinguish a Hexaly model from a script, so they
 ; get @keyword and are listed before the general control-flow set.
 [
@@ -50,46 +56,11 @@
 
 (primitive_type) @type.builtin
 
-; The official variadic-call aggregates. `count` is deliberately absent: it takes a single
-; collection argument and is not a variadic aggregate. `argmin`/`argmax` are not documented.
-(aggregate_expression
-  operator: (identifier) @function.builtin
-  (#any-of? @function.builtin "sum" "prod" "min" "max" "and" "or"))
-
-(call_expression
-  function: (identifier) @function.builtin
-  (#any-of? @function.builtin
-    "abs" "and" "array" "at" "bool" "call" "ceil" "contains" "cos" "count" "cover" "disjoint"
-    "dist" "div" "doubleArrayExternalFunction" "doubleExternalFunction" "end" "eq" "exp" "find"
-    "float" "floor" "geq" "gt" "iif" "int" "intArrayExternalFunction" "intExternalFunction"
-    "indexOf" "interval" "length" "leq" "list" "log" "lt" "max" "min" "mod" "neq" "not"
-    "partition" "piecewise" "pow" "prod" "round" "scalar" "set" "sin" "sort" "sqrt" "start"
-    "sub" "sum" "tan" "xor"))
-
-(call_expression
-  function: (identifier) @function)
-
-(call_expression
-  function: (member_expression
-    property: (identifier) @function.method))
-
-(function_declaration
-  name: (identifier) @function)
-
 (anonymous_function
   "function" @keyword)
 
-(method_declaration
-  name: (identifier) @function.method)
-
-(class_declaration
-  name: (identifier) @type)
-
-(class_declaration
-  superclass: (identifier) @type)
-
-(new_expression
-  class: (identifier) @type)
+; The identifier catch-all. Everything below refines it for specific grammatical roles.
+(identifier) @variable
 
 (parameter_list
   parameter: (identifier) @variable.parameter)
@@ -120,7 +91,45 @@
 (import_specifier
   alias: (identifier) @type)
 
-(identifier) @variable
+(function_declaration
+  name: (identifier) @function)
+
+(method_declaration
+  name: (identifier) @function.method)
+
+(call_expression
+  function: (identifier) @function)
+
+; Called member properties are methods, so this must come after the plain @property rule.
+(call_expression
+  function: (member_expression
+    property: (identifier) @function.method))
+
+; Builtins refine the generic call captures above.
+(call_expression
+  function: (identifier) @function.builtin
+  (#any-of? @function.builtin
+    "abs" "and" "array" "at" "bool" "call" "ceil" "contains" "cos" "count" "cover" "disjoint"
+    "dist" "div" "doubleArrayExternalFunction" "doubleExternalFunction" "end" "eq" "exp" "find"
+    "float" "floor" "geq" "gt" "iif" "int" "intArrayExternalFunction" "intExternalFunction"
+    "indexOf" "interval" "length" "leq" "list" "log" "lt" "max" "min" "mod" "neq" "not"
+    "partition" "piecewise" "pow" "prod" "round" "scalar" "set" "sin" "sort" "sqrt" "start"
+    "sub" "sum" "tan" "xor"))
+
+; The official variadic-call aggregates. `count` is deliberately absent: it takes a single
+; collection argument and is not a variadic aggregate. `argmin`/`argmax` are not documented.
+(aggregate_expression
+  operator: (identifier) @function.builtin
+  (#any-of? @function.builtin "sum" "prod" "min" "max" "and" "or"))
+
+(class_declaration
+  name: (identifier) @type)
+
+(class_declaration
+  superclass: (identifier) @type)
+
+(new_expression
+  class: (identifier) @type)
 
 (string) @string
 (escape_sequence) @string.escape
