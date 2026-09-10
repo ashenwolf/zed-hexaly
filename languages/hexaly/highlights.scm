@@ -62,8 +62,18 @@
 ; The identifier catch-all. Everything below refines it for specific grammatical roles.
 (identifier) @variable
 
+; SCREAMING_CASE reads as a constant to anyone coming from Java. Two or more characters, so
+; single-letter math names (N, a matrix A) stay plain variables.
+((identifier) @constant
+  (#match? @constant "^[A-Z][A-Z0-9_]+$"))
+
 (parameter_list
   parameter: (identifier) @variable.parameter)
+
+; A bare-identifier lambda parameter (`v => v * 2`); the parenthesized form is covered by
+; the parameter_list rule above.
+(lambda
+  parameters: (identifier) @variable.parameter)
 
 ; Loop and aggregate index variables read as parameters: they are bound by the range, not
 ; assigned by the body.
@@ -130,6 +140,27 @@
 
 (new_expression
   class: (identifier) @type)
+
+; Decision binds. `<-` is what makes a name a decision rather than a value, and that is the
+; one construct with no Java analogue, so the bound name gets @variable.special to read
+; differently from ordinary assignment. Bind sites only: use sites would need real scope
+; analysis, which tree-sitter queries cannot do. All four grammatical shapes of a bind:
+(assignment_expression
+  left: (identifier) @variable.special
+  operator: "<-")
+
+(assignment_expression
+  left: (subscript_expression
+    object: (identifier) @variable.special)
+  operator: "<-")
+
+(indexed_declaration
+  name: (identifier) @variable.special
+  "<-")
+
+(declarator
+  name: (identifier) @variable.special
+  "<-")
 
 (string) @string
 (escape_sequence) @string.escape
