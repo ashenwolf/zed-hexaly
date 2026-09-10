@@ -11,4 +11,4 @@ repository = "https://github.com/ashenwolf/zed-hexaly"
 # must be bumped whenever the grammar changes.
 [grammars.hexaly]
 repository = "https://github.com/ashenwolf/tree-sitter-hexaly"
-rev = "c33205ef91bd08eaa8ee183b49a21b507036447b"
+rev = "e5154a10c07b92f99a306b17c41f687206c3b31b"

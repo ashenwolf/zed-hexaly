@@ -39,8 +39,9 @@ repository, [tree-sitter-hexaly](https://github.com/ashenwolf/tree-sitter-hexaly
 so keeping it apart is what keeps generated C out of this repo. A grammar change means
 landing it there and bumping `rev` here.
 
-The grammar was validated by parsing a production Hexaly model (12 files, ~2500 lines) with
-zero errors, and corrected against the official
+The grammar was validated by parsing a production Hexaly model (12 files, ~2500 lines) and
+all 66 example models shipped with Hexaly 14.0 with zero errors, and corrected against the
+official
 [HXM BNF](https://www.hexaly.com/docs/last/modelerreference/appendix.html#bnf-syntax); the
 findings from that pass are kept in the grammar repository's `docs/`.
 
