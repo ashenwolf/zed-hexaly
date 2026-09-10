@@ -18,3 +18,26 @@ rev = "4dd3917847d9a15cc3bd50bf32e267a99e12288e"
 [language_servers.hexaly-lsp]
 name = "Hexaly Language Server"
 languages = ["Hexaly"]
+
+# Zed sandboxes extensions: the two privileged things this one does have to be declared here or
+# the host refuses them at runtime. Both exist to find or fetch the server binary.
+#
+# Running `hexaly-lsp --version` is how the ~/.cargo/bin guess is verified before being trusted -
+# see src/lib.rs. Scoped to that one command and that one argument, because a wildcard would let
+# the extension run anything and this needs exactly one question answered.
+[[capabilities]]
+kind = "process:exec"
+command = "*"
+args = ["--version"]
+
+# Downloading the pinned release when no local binary exists. Scoped to this repository's release
+# assets rather than all of github.com.
+[[capabilities]]
+kind = "download_file"
+host = "github.com"
+path = ["ashenwolf", "hexaly-lsp", "**"]
+
+[[capabilities]]
+kind = "download_file"
+host = "objects.githubusercontent.com"
+path = ["**"]
