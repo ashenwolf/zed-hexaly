@@ -11,7 +11,7 @@ repository = "https://github.com/ashenwolf/zed-hexaly"
 # must be bumped whenever the grammar changes.
 [grammars.hexaly]
 repository = "https://github.com/ashenwolf/tree-sitter-hexaly"
-rev = "e5154a10c07b92f99a306b17c41f687206c3b31b"
+rev = "4dd3917847d9a15cc3bd50bf32e267a99e12288e"
 
 # hexaly-lsp is a separate executable the user installs, not a bundled binary. It speaks plain LSP
 # over stdio and is not Zed-specific, so the same server serves Neovim, Helix and Emacs.
