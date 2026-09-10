@@ -23,7 +23,7 @@ const REPOSITORY: &str = "ashenwolf/hexaly-lsp";
 /// server are three coupled versions; resolving the newest release at runtime would let a server
 /// change reach users of an older extension, which is a class of bug that only reproduces on someone
 /// else's machine. Bumping this is a deliberate commit, the same as bumping the grammar.
-const SERVER_VERSION: &str = "v0.1.0";
+const SERVER_VERSION: &str = "v0.2.0";
 
 struct HexalyExtension {
     /// Path to a binary this process already downloaded, if it did.
